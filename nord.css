@@ -1,0 +1,563 @@
+/* ═══════════════════════════════════════
+Nord Dark (Lightweight)
+       - By: jake9000
+       - Description: A comprehensive but lightweight Nord Dark theme.
+       - Base: Nord Theme (https://www.nordtheme.com/)
+       - License: CC-0, no rights reserved
+       - NOTE: Some features come from the companion extension, theme-helper
+═══════════════════════════════════════ */
+
+:root {
+  /* ── Semantic Core (App Shell) ── */
+  --background: #2e3440;
+  --foreground: #eceff4;
+  --primary: #88c0d0;
+  --primary-foreground: #2e3440;
+  --destructive: #bf616a;
+  --destructive-foreground: #eceff4;
+
+  /* ── Surface Colors ── */
+  --card: #3b4252;
+  --card-foreground: #eceff4;
+  --secondary: #434c5e;
+  --secondary-foreground: #d8dee9;
+  --accent: #4c566a;
+  --accent-foreground: #eceff4;
+  --popover: #3b4252;
+  --popover-foreground: #eceff4;
+
+  /* ── Borders & Inputs ── */
+  --border: #4c566a;
+  --input: #3b4252;
+  --ring: #88c0d0;
+  --radius: 8px;
+
+  /* ── Text ── */
+  --muted: #434c5e;
+  --muted-foreground: #d8dee9;
+
+  /* ── Sidebar ── */
+  --sidebar: #2e3440;
+  --sidebar-foreground: #d8dee9;
+  --sidebar-border: #3b4252;
+  --sidebar-accent: #434c5e;
+  --sidebar-accent-foreground: #88c0d0;
+
+  /* ── UI Polish (Glass & Special Surfaces) ── */
+  --panel-bg-soft: rgba(59, 66, 82, 0.78);
+  --panel-bg-soft-strong: rgba(59, 66, 82, 0.82);
+  --panel-border-accent: rgba(136, 192, 208, 0.25);
+  --panel-border-accent-strong: rgba(136, 192, 208, 0.26);
+  --panel-button-bg-strong: rgba(46, 52, 64, 0.6);
+  --panel-button-hover: rgba(94, 129, 172, 0.28);
+  --panel-button-hover-strong: rgba(94, 129, 172, 0.32);
+
+  --hud-chip-bg: rgba(46, 52, 64, 0.68);
+  --hud-chip-bg-hover: rgba(59, 66, 82, 0.86);
+  --hud-chip-bg-active: rgba(67, 76, 94, 0.9);
+  --hud-chip-border: rgba(136, 192, 208, 0.3);
+  --hud-chip-border-active: rgba(143, 188, 187, 0.42);
+  --hud-chip-icon: #88c0d0;
+  
+  --hud-menu-bg: rgba(46, 52, 64, 0.9);
+  --hud-menu-border: rgba(136, 192, 208, 0.28);
+  --hud-menu-divider: rgba(136, 192, 208, 0.16);
+  --hud-menu-item-hover: rgba(94, 129, 172, 0.24);
+  --hud-menu-danger-hover: rgba(191, 97, 106, 0.22);
+
+  /* ── Glows ── */
+  --glow-primary: rgba(136, 192, 208, 0.2);
+  --glow-accent: rgba(143, 188, 187, 0.15);
+
+  /* ── Y2K Palette Remapping (Catch-all for hardcoded-feeling spots) ── */
+  --y2k-pink: #88c0d0;     /* Redirect pink to Frost Blue */
+  --y2k-purple: #b48ead;   /* Use actual Nord Purple */
+  --y2k-lavender: #b48ead;
+  --y2k-blue: #81a1c1;
+  --y2k-mint: #a3be8c;
+  --y2k-peach: #d08770;
+  --y2k-yellow: #ebcb8b;
+
+  /* ── Hardcoded Tailwind Color Hijacking ── */
+  /* Purple -> Nord Aurora Purple */
+  --color-purple-300: #c29bb7;
+  --color-purple-400: #b48ead;
+  --color-purple-500: #a17b9b;
+  --color-violet-400: #b48ead;
+  --color-violet-500: #a17b9b;
+
+  /* Emerald -> Nord Aurora Green */
+  --color-emerald-300: #b1c79e;
+  --color-emerald-400: #a3be8c;
+  --color-emerald-500: #8ea778;
+
+  /* Amber -> Nord Aurora Yellow/Orange */
+  --color-amber-300: #f1d59f;
+  --color-amber-400: #ebcb8b;
+  --color-amber-500: #d08770;
+  --color-orange-400: #d08770;
+
+  /* Red -> Nord Aurora Red */
+  --color-red-400: #c97981;
+  --color-red-500: #bf616a;
+
+  /* Sky/Blue -> Nord Frost Blue */
+  --color-sky-300: #9ccbd8;
+  --color-sky-400: #88c0d0;
+  --color-sky-500: #7eb2c2;
+  --color-blue-400: #81a1c1;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Force the font to be clean sans-serif if it was set to something else */
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   Shared polish
+═══════════════════════════════════════ */
+
+.card, .panel, [data-slot="card"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+button, .btn, [role="button"] {
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+button:hover, .btn:hover, [role="button"]:hover {
+  filter: brightness(1.1);
+}
+
+/* Custom scrollbar to match the Nord palette */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #434c5e;
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4c566a;
+}
+
+/* ═══════════════════════════════════════
+   Themed Components (via theme-helper.js)
+═══════════════════════════════════════ */
+
+/* Chat Input Bar */
+.mari-app .themed-chat-input {
+   background: var(--panel-bg-soft-strong) !important;
+   border: 2px solid color-mix(in srgb, var(--primary) 15%, transparent) !important;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.mari-app .themed-chat-input:focus-within,
+.mari-app .themed-chat-input:has(textarea:not(:placeholder-shown)),
+.mari-app .themed-chat-input:has(.group.relative:not(:empty)) {
+   border-color: var(--primary) !important;
+   background: color-mix(in srgb, var(--background) 95%, white) !important;
+   box-shadow: 
+      0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
+      0 0 18px color-mix(in srgb, var(--primary) 20%, transparent),
+      0 8px 24px rgba(0, 0, 0, 0.25) !important;
+   transform: translateY(-1px);
+}
+
+.mari-app .mari-chat-input-textarea {
+   color: var(--foreground) !important;
+   caret-color: var(--primary) !important;
+   font-size: 0.925rem !important;
+}
+
+.mari-app .themed-chat-input:has(textarea:not(:placeholder-shown)) .mari-chat-send-btn,
+.mari-app .themed-chat-input:has(.group.relative:not(:empty)) .mari-chat-send-btn {
+   color: var(--primary) !important;
+   background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+   box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 25%, transparent) !important;
+}
+
+/* Message Bubbles */
+/*
+ * Use color-mix() with --bubble-opacity (set by theme-helper.js) so that
+ * bubbles automatically react to --secondary changes when switching between
+ * dark/light color schemes. No page refresh needed.
+ * Falls back to opacity 0.6 if --bubble-opacity hasn't been set yet.
+ */
+.mari-app .themed-bubble {
+   background-color: color-mix(in srgb, var(--secondary) calc(var(--bubble-opacity, 0.6) * 100%), transparent) !important;
+   border: 1px solid var(--panel-border-accent) !important;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+   color: var(--foreground) !important;
+}
+
+.mari-app .themed-bubble.rpg-streaming {
+   border-color: var(--primary) !important;
+   box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+
+/* Roleplay HUD Widgets */
+.mari-app .themed-hud-widget {
+   background: var(--hud-chip-bg) !important;
+   border: 1px solid var(--hud-chip-border) !important;
+   box-shadow: none !important;
+}
+
+.mari-app .themed-hud-widget:hover {
+   background: var(--hud-chip-bg-hover) !important;
+}
+
+.mari-app .themed-hud-widget[data-state="open"],
+.mari-app .themed-hud-widget[class*="bg-black/60"] {
+   background: var(--hud-chip-bg-active) !important;
+   border-color: var(--hud-chip-border-active) !important;
+}
+
+/* RP Top-Right Widget Buttons (Author's Notes, Chat Summary, etc.) */
+.mari-app button[class*="rounded-full"][class*="backdrop-blur"] {
+    background: var(--hud-chip-bg) !important;
+    border-color: var(--hud-chip-border) !important;
+    color: var(--foreground) !important;
+}
+
+.mari-app button[class*="rounded-full"][class*="backdrop-blur"]:hover {
+    background: var(--hud-chip-bg-active) !important;
+    border-color: var(--hud-chip-border-active) !important;
+    color: var(--foreground) !important;
+}
+
+/* Active/highlighted widget (e.g., Chat Summary when open) */
+.mari-app button[class*="rounded-full"][class*="backdrop-blur"][class*="bg-foreground\/10"] {
+    background: var(--hud-chip-bg-active) !important;
+    border-color: var(--hud-chip-border-active) !important;
+}
+
+/* Popovers & Menus */
+.mari-app .themed-popover {
+   background: var(--hud-menu-bg) !important;
+   border: 1px solid var(--hud-menu-border) !important;
+   box-shadow: 
+      0 18px 44px rgba(11, 15, 22, 0.62),
+      0 0 0 1px color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+
+/* Action Bars & Buttons (generic panels/toolbars) */
+.mari-app .themed-action-bar {
+   background: var(--panel-bg-soft) !important;
+   border: 1px solid var(--panel-border-accent) !important;
+}
+
+.mari-app .themed-action-button {
+   background: transparent !important;
+   color: var(--muted-foreground) !important;
+}
+
+.mari-app .themed-action-button:hover {
+   background: var(--panel-button-hover) !important;
+   color: var(--foreground) !important;
+}
+
+/* Message action bar — subtle pill behind the row of action icons */
+.mari-app .mari-message-actions {
+   display: inline-flex !important;
+   align-items: center;
+   justify-content: flex-start;
+   flex-direction: row !important;
+   align-self: flex-start;
+   flex: 0 0 auto;
+   width: fit-content !important;
+   max-width: max-content;
+   gap: 0.2rem;
+   padding: 0.2rem 0.35rem;
+   border-radius: 9999px;
+   background: var(--panel-bg-soft);
+   border: 1px solid var(--panel-border-accent);
+   transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+/* Message action buttons inside the pill */
+.mari-app .mari-message-actions .themed-action-button {
+   min-width: 1.75rem !important;
+   min-height: 1.75rem !important;
+   padding: 0.25rem !important;
+   border-radius: 9999px !important;
+   background: transparent !important;
+   border: none !important;
+   outline: none !important;
+   box-shadow: none !important;
+   color: var(--muted-foreground) !important;
+   line-height: 1;
+   transition: background-color 140ms ease, color 140ms ease;
+}
+
+.mari-app .mari-message-actions .themed-action-button:hover {
+   background: var(--panel-button-hover) !important;
+   color: var(--text-strong) !important;
+}
+
+.mari-app .mari-message-actions .themed-action-button:is(:focus-visible, :active) {
+   background: var(--panel-button-hover) !important;
+   color: var(--text-strong) !important;
+}
+
+.mari-app .mari-message-actions .themed-action-button svg {
+   width: 1rem !important;
+   height: 1rem !important;
+}
+
+/* Kill the border that .themed-action-bar applies to SVG icons inside message actions */
+.mari-app .mari-message-actions svg.themed-action-bar,
+.mari-app .mari-message-actions svg.themed-action-bar * {
+   border: none !important;
+   background: transparent !important;
+}
+
+/* Swipe indicator / pager between message text and action buttons */
+.mari-app .mari-message-swipes {
+   display: inline-flex !important;
+   align-items: center;
+   justify-content: flex-start;
+   align-self: flex-start;
+   flex: 0 0 auto;
+   width: fit-content !important;
+   max-width: max-content;
+   gap: 0.3rem;
+   padding: 0.2rem 0.45rem;
+   min-height: 1.6rem;
+   border-radius: 9999px;
+   background: var(--panel-bg-soft-strong) !important;
+   border: 1px solid var(--panel-border-accent-strong);
+   color: var(--text-soft) !important;
+   font-size: 0.75rem !important;
+}
+
+.mari-app .mari-message-swipes > button {
+   min-width: 1.35rem !important;
+   min-height: 1.35rem !important;
+   padding: 0.15rem !important;
+   border-radius: 9999px !important;
+   background: var(--panel-button-bg-strong);
+   color: var(--muted-foreground) !important;
+}
+
+.mari-app .mari-message-swipes > button:hover:not(:disabled) {
+   background: var(--panel-button-hover-strong) !important;
+}
+
+.mari-app .mari-message-swipes > button:disabled {
+   opacity: 0.45 !important;
+}
+
+.mari-app .mari-message-swipes > button > svg {
+   width: 0.95rem !important;
+   height: 0.95rem !important;
+}
+
+.mari-app .mari-message-swipes .tabular-nums {
+   min-width: 2.1rem;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: var(--text-strong) !important;
+}
+
+/* Textareas (Edit Mode) */
+.mari-app .themed-textarea {
+   background: var(--input) !important;
+   border: 1px solid var(--border) !important;
+   color: var(--foreground) !important;
+   caret-color: var(--primary) !important;
+}
+
+.mari-app .themed-textarea:focus {
+   border-color: var(--primary) !important;
+   box-shadow: 0 0 0 1px var(--primary) !important;
+}
+
+/* Thinking Indicator */
+.mari-app .themed-thinking span {
+    background-color: var(--primary) !important;
+    opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════
+   Panel Navigation Buttons (Top Bar)
+═══════════════════════════════════════ */
+
+/* Left-side Top Bar Button Cluster (Chats & Home) */
+header[data-component="TopBar"] > div.flex.items-center.gap-2 {
+   background: var(--secondary);
+   border-radius: 0.75rem;
+   padding: 0.25rem 0.5rem;
+}
+
+[aria-label="Panel navigation"] {
+   background: var(--secondary) !important;
+}
+
+[aria-label="Panel navigation"] button {
+   color: var(--muted-foreground) !important;
+   background: transparent !important;
+}
+
+[aria-label="Panel navigation"] button:hover {
+   background: var(--sidebar-accent) !important;
+   color: var(--sidebar-accent-foreground) !important;
+}
+
+[aria-label="Panel navigation"] button[class*="bg-"] {
+   background: color-mix(in srgb, var(--primary) 15%, transparent) !important;
+   color: var(--primary) !important;
+}
+
+/* ═══════════════════════════════════════
+   Chat Sidebar
+═══════════════════════════════════════ */
+
+.mari-chat-sidebar a[aria-current="page"],
+.mari-chat-sidebar div[data-state="active"] {
+    background: var(--card) !important;
+    color: var(--sidebar-accent-foreground) !important;
+    border-left: 3px solid var(--primary) !important;
+    padding-left: 13px !important;
+    border-radius: var(--radius);
+}
+
+.mari-chat-sidebar div[role="button"][class*="bg-[var(--sidebar-accent)]"]:has(> span[style*="linear-gradient"]) {
+    background: var(--card) !important;
+    border: 1px solid var(--primary) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    border-radius: var(--radius) !important;
+}
+
+.mari-chat-sidebar div[role="button"][class*="bg-[var(--sidebar-accent)]"]:has(> span[style*="linear-gradient"]) > span[style*="linear-gradient"] {
+    display: none !important;
+}
+
+.mari-chat-sidebar a:hover,
+.mari-chat-sidebar div[role="button"]:hover:not([class*="bg-[var(--sidebar-accent)]"]) {
+    background-color: var(--sidebar-accent) !important;
+    color: var(--sidebar-accent-foreground) !important;
+}
+
+/* ═══════════════════════════════════════
+   Message Bubbles (Mode Specific)
+═══════════════════════════════════════ */
+
+/* Conversation/Texting Bubbles */
+.mari-app .texting-bubble-user {
+   background: color-mix(in srgb, var(--primary) 90%, transparent) !important;
+   color: var(--primary-foreground) !important;
+   border: 1px solid var(--primary) !important;
+}
+
+.mari-app .texting-bubble-other {
+   background: var(--card) !important;
+   color: var(--card-foreground) !important;
+   border: 1px solid var(--border) !important;
+}
+
+/* Fix "name" label above roleplay bubbles */
+.mari-app .mari-message-name {
+   color: var(--primary) !important;
+}
+
+/* Ensure message content text respects the theme's foreground color */
+.mari-app .mari-message-content {
+    color: var(--foreground);
+}
+
+/* ═══════════════════════════════════════
+   Light Mode (Nord Snow Storm)
+═══════════════════════════════════════ */
+[data-theme="light"] {
+  --background: #eceff4;
+  --foreground: #3b4252;
+  --primary: #5e81ac;
+  --primary-foreground: #eceff4;
+  --destructive: #bf616a;
+  --destructive-foreground: #eceff4;
+
+  --card: #e5e9f0;
+  --card-foreground: #2e3440;
+  --secondary: #d8dee9;
+  --secondary-foreground: #3b4252;
+  --accent: #d8dee9;
+  --accent-foreground: #2e3440;
+  --popover: #e5e9f0;
+  --popover-foreground: #2e3440;
+
+  --border: #d8dee9;
+  --input: #e5e9f0;
+  --ring: #5e81ac;
+
+  --muted: #d8dee9;
+  --muted-foreground: #4c566a;
+
+  --sidebar: #eceff4;
+  --sidebar-foreground: #3b4252;
+  --sidebar-border: #d8dee9;
+  --sidebar-accent: #c4cad7;
+  --sidebar-accent-foreground: #5e81ac;
+
+  --panel-bg-soft: rgba(229, 233, 240, 0.78);
+  --panel-bg-soft-strong: rgba(229, 233, 240, 0.82);
+  --panel-border-accent: rgba(94, 129, 172, 0.25);
+  --panel-border-accent-strong: rgba(94, 129, 172, 0.26);
+  --panel-button-bg-strong: rgba(216, 222, 233, 0.6);
+  --panel-button-hover: rgba(94, 129, 172, 0.15);
+  --panel-button-hover-strong: rgba(94, 129, 172, 0.2);
+
+  --hud-chip-bg: rgba(229, 233, 240, 0.68);
+  --hud-chip-bg-hover: rgba(229, 233, 240, 0.86);
+  --hud-chip-bg-active: rgba(216, 222, 233, 0.9);
+  --hud-chip-border: rgba(94, 129, 172, 0.3);
+  --hud-chip-border-active: rgba(94, 129, 172, 0.42);
+  --hud-chip-icon: #5e81ac;
+
+  --hud-menu-bg: rgba(236, 239, 244, 0.95);
+  --hud-menu-border: rgba(94, 129, 172, 0.28);
+  --hud-menu-divider: rgba(94, 129, 172, 0.16);
+  --hud-menu-item-hover: rgba(94, 129, 172, 0.1);
+  --hud-menu-danger-hover: rgba(191, 97, 106, 0.1);
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .mari-app .mari-message-content :is(strong, span)[style*="color"] {
+    filter: brightness(0.7);
+}
+
+[data-theme="light"] .themed-chat-input {
+    background: #4c566a !important; /* Nord3 */
+    border-color: #4c566a !important;
+}
+
+[data-theme="light"] .themed-chat-input :is(.mari-chat-input-textarea, button, .lucide, svg) {
+    color: #d8dee9 !important; /* Nord4 */
+}
+
+[data-theme="light"] .themed-chat-input .mari-chat-input-textarea::placeholder {
+    color: #d8dee9 !important;
+    opacity: 0.45;
+}
+
+[data-theme="light"] .themed-chat-input:focus-within,
+[data-theme="light"] .themed-chat-input:has(textarea:not(:placeholder-shown)) {
+   border-color: var(--primary) !important;
+   box-shadow: 
+      0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent),
+      0 0 20px color-mix(in srgb, var(--primary) 25%, transparent),
+      0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}

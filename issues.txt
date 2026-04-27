@@ -1,0 +1,10 @@
+1. [RESOLVED] light theme: The text in div "mari-message-swipes" are white. the background is also white. Make the text darker. 
+2. [RESOLVED] light theme: The div mari-chat-input is not compliant with nord snowstorm.  
+3. [resolved] roleplay message background opacity slider. The assistant and user bubbles have different hardcoded max opacities. this needs to be accounted for in the extension so that the user's slider is 1:1 with what they see. 
+4. [resolved] In the chats menu (left hand sidebar), when 'RP' is the selected chat type, it is hard to tell. make it look like how 'CONVO' mode looks when it's selected.
+5. [resolved] top bar button clusters and side panel navigation should also be themed.
+6. [resolved] light theme: default text is too light. dialogue text is too light and needs more contrast. 
+7. [resolved] Convo mode chat sessions: the message input bar is not themed. 
+8. [resolved] In convo mode, the message input bar (the entire thing, not just the text) should look similar to how it does in RP mode. 
+9. In convo mode, the background color is determined by the 'conversation theme' system level setting. This should have separate settings for dark theme and light theme. (enhance via extension?)
+10. [resolved] In convo mode, the widget in the upper left is not themed. 
