@@ -540,24 +540,121 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
 }
 
 [data-theme="light"] .themed-chat-input {
-    background: #4c566a !important; /* Nord3 */
-    border-color: #4c566a !important;
+    background: var(--input) !important;
+    border-color: var(--border) !important;
 }
 
 [data-theme="light"] .themed-chat-input :is(.mari-chat-input-textarea, button, .lucide, svg) {
-    color: #d8dee9 !important; /* Nord4 */
+    color: var(--foreground) !important;
 }
 
 [data-theme="light"] .themed-chat-input .mari-chat-input-textarea::placeholder {
-    color: #d8dee9 !important;
-    opacity: 0.45;
+    color: var(--muted-foreground) !important;
+    opacity: 0.55;
 }
 
 [data-theme="light"] .themed-chat-input:focus-within,
 [data-theme="light"] .themed-chat-input:has(textarea:not(:placeholder-shown)) {
+   background: var(--input) !important;
    border-color: var(--primary) !important;
-   box-shadow: 
+   box-shadow:
       0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent),
       0 0 20px color-mix(in srgb, var(--primary) 25%, transparent),
-      0 8px 32px rgba(0, 0, 0, 0.4) !important;
+      0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .themed-chat-input:focus-within :is(.mari-chat-input-textarea, button, .lucide, svg),
+[data-theme="light"] .themed-chat-input:has(textarea:not(:placeholder-shown)) :is(.mari-chat-input-textarea, button, .lucide, svg) {
+    color: var(--foreground) !important;
+}
+
+/* ── Session Log modal (engine hardcodes white/dark, invisible in light mode) ── */
+/* Container: fixed overlay → bg-[var(--card)] rounded-2xl max-w-2xl card */
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white,
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white\/80,
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white\/60,
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white\/90 {
+  color: var(--foreground) !important;
+}
+
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white\/20 {
+  color: var(--muted-foreground) !important;
+}
+
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .border-white\/5,
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .border-white\/10,
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .border-white\/15 {
+  border-color: var(--border) !important;
+}
+
+/* Edit inputs inside session log: swap dark bg + white text for theme-aware values */
+[data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .bg-black\/40 {
+  background: var(--input) !important;
+}
+
+/* ── GM Mode play area (narration card, widgets, input) ── */
+
+/* Narration card + widget cards: engine hardcodes dark overlays */
+[data-theme="light"] [data-tour="game-dialogue"] .bg-black\/50,
+[data-theme="light"] [data-tour="game-dialogue"] .bg-black\/60 {
+  background: var(--card) !important;
+}
+[data-theme="light"] [data-tour="game-dialogue"] .bg-black\/35 {
+  background: var(--secondary) !important;
+}
+[data-theme="light"] [data-tour="game-dialogue"] .bg-white\/10 {
+  background: var(--secondary) !important;
+}
+[data-theme="light"] [data-tour="game-dialogue"] .bg-white\/5 {
+  background: var(--muted) !important;
+}
+
+/* Narration / widget borders */
+[data-theme="light"] [data-tour="game-dialogue"] .border-white\/10,
+[data-theme="light"] [data-tour="game-dialogue"] .border-white\/15 {
+  border-color: var(--border) !important;
+}
+
+/* Narration / widget text */
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/90,
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/75,
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/70,
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/50 {
+  color: var(--foreground) !important;
+}
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/30 {
+  color: var(--muted-foreground) !important;
+}
+[data-theme="light"] [data-tour="game-dialogue"] .text-white\/20 {
+  color: var(--muted-foreground) !important;
+}
+
+/* Narration body text — engine sets inline style="color: rgb(255, 255, 255)" */
+[data-theme="light"] .game-narration-prose [style*="color: rgb(255"] {
+  color: var(--foreground) !important;
+}
+
+/* Textarea hardcoded gray */
+[data-theme="light"] [data-tour="game-dialogue"] textarea.text-\[\#c3c2c2\] {
+  color: var(--foreground) !important;
+}
+
+/* Desktop widget cards (bottom-left, outside game-dialogue tour) */
+[data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg.border {
+  background: var(--card) !important;
+}
+
+/* Widget text — inline colored names/values and radial gauge needles use bright
+   colors designed for dark backgrounds. Darken them for light mode, matching the
+   same brightness(0.7) filter already applied to character dialogue colors. */
+[data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg .text-white\/70,
+[data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg .text-white\/50,
+[data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg .text-white\/30 {
+  color: var(--foreground) !important;
+}
+
+/* Radial gauge needles, widget name labels, bond values — all use inline
+   rgb/rgba colors that are too bright against a light card background. */
+[data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg [style*="rgb"] {
+  filter: brightness(0.7);
 }
