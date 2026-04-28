@@ -79,33 +79,70 @@ Nord Dark (Lightweight)
   --y2k-yellow: #ebcb8b;
 
   /* ── Hardcoded Tailwind Color Hijacking ── */
+
   /* Purple -> Nord Aurora Purple */
   --color-purple-300: #c29bb7;
   --color-purple-400: #b48ead;
   --color-purple-500: #a17b9b;
+
+  /* Violet -> Nord Aurora Purple */
+  --color-violet-200: #dbcdd8;
   --color-violet-400: #b48ead;
   --color-violet-500: #a17b9b;
+  --color-violet-700: #7f647a;
 
-  /* Emerald -> Nord Aurora Green */
-  --color-emerald-300: #b1c79e;
-  --color-emerald-400: #a3be8c;
-  --color-emerald-500: #8ea778;
-
-  /* Amber -> Nord Aurora Yellow/Orange */
-  --color-amber-300: #f1d59f;
-  --color-amber-400: #ebcb8b;
-  --color-amber-500: #d08770;
-  --color-orange-400: #d08770;
+  /* Rose -> Nord Aurora Red */
+  --color-rose-200: #dfa8ad;
+  --color-rose-400: #c97981;
+  --color-rose-500: #bf616a;
+  --color-rose-700: #8c4a52;
 
   /* Red -> Nord Aurora Red */
   --color-red-400: #c97981;
   --color-red-500: #bf616a;
+
+  /* Emerald -> Nord Aurora Green */
+  --color-emerald-200: #cde0bc;
+  --color-emerald-300: #b1c79e;
+  --color-emerald-400: #a3be8c;
+  --color-emerald-500: #8ea778;
+  --color-emerald-700: #718564;
+
+  /* Amber -> Nord Aurora Yellow */
+  --color-amber-200: #f5e4ba;
+  --color-amber-300: #f1d59f;
+  --color-amber-400: #ebcb8b;
+  --color-amber-500: #d08770;
+  --color-amber-700: #a89260;
+
+  /* Orange -> Nord Aurora Orange */
+  --color-orange-200: #e8c1b3;
+  --color-orange-300: #d99d81;
+  --color-orange-400: #d08770;
+  --color-orange-500: #c47a64;
+
+  /* Cyan -> Nord Frost Teal */
+  --color-cyan-200: #b8dce6;
+  --color-cyan-300: #a6d2de;
+  --color-cyan-400: #9ccbd8;
+  --color-cyan-500: #88c0d0;
+  --color-cyan-700: #5f8e9a;
+
+  /* Fuchsia -> Nord Aurora Purple */
+  --color-fuchsia-200: #dbcdd8;
+  --color-fuchsia-300: #caacc5;
+  --color-fuchsia-400: #b48ead;
+  --color-fuchsia-500: #a17b9b;
+  --color-fuchsia-700: #7f647a;
 
   /* Sky/Blue -> Nord Frost Blue */
   --color-sky-300: #9ccbd8;
   --color-sky-400: #88c0d0;
   --color-sky-500: #7eb2c2;
   --color-blue-400: #81a1c1;
+
+  /* ── Cursor ── */
+  --cursor-pink: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 3L10 20L12 12L20 10L3 3Z' fill='%2388c0d0' stroke='%232e3440' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 html, body {
@@ -113,6 +150,12 @@ html, body {
   color: var(--foreground);
   /* Force the font to be clean sans-serif if it was set to something else */
   font-family: "Inter", "Segoe UI", sans-serif;
+  caret-color: var(--primary);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 /* ═══════════════════════════════════════
@@ -126,11 +169,7 @@ html, body {
 }
 
 button, .btn, [role="button"] {
-  transition: transform 0.1s ease, filter 0.2s ease;
-}
-
-button:hover, .btn:hover, [role="button"]:hover {
-  filter: brightness(1.1);
+  transition: background-color 0.15s ease;
 }
 
 /* Custom scrollbar to match the Nord palette */
@@ -162,7 +201,7 @@ button:hover, .btn:hover, [role="button"]:hover {
    background: var(--panel-bg-soft-strong) !important;
    border: 2px solid color-mix(in srgb, var(--primary) 15%, transparent) !important;
    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+   transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .mari-app .themed-chat-input:focus-within,
@@ -170,17 +209,19 @@ button:hover, .btn:hover, [role="button"]:hover {
 .mari-app .themed-chat-input:has(.group.relative:not(:empty)) {
    border-color: var(--primary) !important;
    background: color-mix(in srgb, var(--background) 95%, white) !important;
-   box-shadow: 
+   box-shadow:
       0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
       0 0 18px color-mix(in srgb, var(--primary) 20%, transparent),
       0 8px 24px rgba(0, 0, 0, 0.25) !important;
-   transform: translateY(-1px);
 }
 
 .mari-app .mari-chat-input-textarea {
    color: var(--foreground) !important;
    caret-color: var(--primary) !important;
    font-size: 0.925rem !important;
+   min-height: 2.5rem !important;
+   padding-top: 0.4rem !important;
+   padding-bottom: 0.4rem !important;
 }
 
 .mari-app .themed-chat-input:has(textarea:not(:placeholder-shown)) .mari-chat-send-btn,
@@ -245,13 +286,31 @@ button:hover, .btn:hover, [role="button"]:hover {
     border-color: var(--hud-chip-border-active) !important;
 }
 
-/* Popovers & Menus */
-.mari-app .themed-popover {
+/* Popovers & Menus — only target the root popover element (z-[9999]),
+   not every nested child that theme-helper sprinkles the class on. */
+.mari-app .z-\[9999\].themed-popover {
    background: var(--hud-menu-bg) !important;
    border: 1px solid var(--hud-menu-border) !important;
-   box-shadow: 
+   box-shadow:
       0 18px 44px rgba(11, 15, 22, 0.62),
       0 0 0 1px color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+
+/* Popover content text — engine hardcodes white, invisible against light bg */
+[data-theme="light"] .z-\[9999\].themed-popover .text-white,
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/80,
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/70,
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/60,
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/50 {
+   color: var(--foreground) !important;
+}
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/20,
+[data-theme="light"] .z-\[9999\].themed-popover .text-white\/30 {
+   color: var(--muted-foreground) !important;
+}
+[data-theme="light"] .z-\[9999\].themed-popover .border-white\/10,
+[data-theme="light"] .z-\[9999\].themed-popover .border-white\/5 {
+   border-color: var(--border) !important;
 }
 
 /* Action Bars & Buttons (generic panels/toolbars) */
@@ -392,6 +451,13 @@ button:hover, .btn:hover, [role="button"]:hover {
     opacity: 0.6;
 }
 
+/* Mari "thinking/updating" indicator pill — upstream uses bg-blue-400 (Tailwind
+   #60A5FA) which is brighter and more saturated than any Nord accent. Replace
+   the pulsing dots with Nord's primary color. */
+[role="status"][aria-live="polite"] [aria-hidden="true"] .rounded-full {
+  background-color: var(--primary);
+}
+
 /* ═══════════════════════════════════════
    Panel Navigation Buttons (Top Bar)
 ═══════════════════════════════════════ */
@@ -469,14 +535,42 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
    border: 1px solid var(--border) !important;
 }
 
-/* Fix "name" label above roleplay bubbles */
+/* Character names — larger and in the primary color */
 .mari-app .mari-message-name {
    color: var(--primary) !important;
+   font-size: 0.85rem !important;
 }
+
+/* Metadata (timestamp, token count, gen label, message number) —
+   monospace and wrapped in brackets */
+.mari-app .mari-message-name ~ span {
+   font-family: "SF Mono", "Fira Code", "Consolas", monospace !important;
+   font-style: normal !important;
+}
+.mari-app .mari-message-name ~ span::before {
+   content: "[";
+}
+.mari-app .mari-message-name ~ span::after {
+   content: "]";
+}
+/* Convo mode metadata */
+.mari-app .mari-message-timestamp {
+   font-family: "SF Mono", "Fira Code", "Consolas", monospace !important;
+}
+.mari-app .mari-message-timestamp::before { content: "["; }
+.mari-app .mari-message-timestamp::after  { content: "]"; }
 
 /* Ensure message content text respects the theme's foreground color */
 .mari-app .mari-message-content {
     color: var(--foreground);
+}
+
+/* Horizontal rules (--- in markdown) — upstream uses var(--border) which in
+   Nord is close to the background in both modes (#4c566a on #2e3440 dark,
+   #d8dee9 on #eceff4 light). Use foreground at 20% opacity for a visible but
+   unobtrusive separator line. */
+.mari-message-content hr {
+  border-top-color: color-mix(in srgb, var(--foreground) 20%, transparent) !important;
 }
 
 /* ═══════════════════════════════════════
@@ -485,7 +579,7 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
 [data-theme="light"] {
   --background: #eceff4;
   --foreground: #3b4252;
-  --primary: #5e81ac;
+  --primary: #4e71a0;
   --primary-foreground: #eceff4;
   --destructive: #bf616a;
   --destructive-foreground: #eceff4;
@@ -501,7 +595,7 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
 
   --border: #d8dee9;
   --input: #e5e9f0;
-  --ring: #5e81ac;
+  --ring: #4e71a0;
 
   --muted: #d8dee9;
   --muted-foreground: #4c566a;
@@ -532,6 +626,13 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
   --hud-menu-divider: rgba(94, 129, 172, 0.16);
   --hud-menu-item-hover: rgba(94, 129, 172, 0.1);
   --hud-menu-danger-hover: rgba(191, 97, 106, 0.1);
+
+  /* ── Glows ── */
+  --glow-primary: rgba(78, 113, 160, 0.2);
+  --glow-accent: rgba(78, 113, 160, 0.15);
+
+  /* ── Cursor ── */
+  --cursor-pink: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 3L10 20L12 12L20 10L3 3Z' fill='%235e81ac' stroke='%23eceff4' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 /* Light Mode Overrides */
@@ -657,4 +758,84 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
    rgb/rgba colors that are too bright against a light card background. */
 [data-theme="light"] .bg-black\/60.backdrop-blur-md.rounded-lg [style*="rgb"] {
   filter: brightness(0.7);
+}
+
+/* RP atmosphere overlay — upstream uses a pale lavender gradient (#faf8ff)
+   that doesn't fit Nord's cool blue-gray palette. Replace with Snow Storm
+   tones at matching opacities for a subtle cool haze. */
+[data-theme="light"] .rpg-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(216, 222, 233, 0.3) 0%,
+    rgba(216, 222, 233, 0.18) 30%,
+    rgba(216, 222, 233, 0.22) 70%,
+    rgba(216, 222, 233, 0.35) 100%
+  );
+}
+
+/* RP vignette — upstream uses a purple radial gradient (rgba(120,100,160,…)).
+   Replace with a subtle Polar Night edge shadow that matches Nord's grounded
+   dark tones. */
+[data-theme="light"] .rpg-vignette {
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(59, 66, 82, 0.1) 100%);
+}
+
+/* ═══════════════════════════════════════
+   Home Page FAQ Widget
+═══════════════════════════════════════ */
+
+/* FAQ header icon — replace hardcoded orange/teal gradient with Nord Frost */
+.mari-app button[aria-expanded] [class*="linear-gradient(135deg,rgba(235,137,81"] {
+  background-image: linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, transparent), color-mix(in srgb, var(--primary) 10%, transparent)) !important;
+}
+
+/* FAQ expanded professor Mari card — same hardcoded orange/teal gradient */
+.mari-app section.w-full.max-w-md [class*="linear-gradient(135deg,rgba(235,137,81"] {
+  background-image: linear-gradient(135deg, var(--glow-accent), var(--glow-primary)) !important;
+}
+
+/* FAQ outer container dark gradient — replace hardcoded rgb with Nord Polar Night tones */
+[data-theme="dark"] .mari-app section.w-full.max-w-md > div[class*="linear-gradient(180deg,rgba(18,14,23"] {
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), color-mix(in srgb, var(--background) 86%, transparent)) !important;
+}
+
+/* ═══════════════════════════════════════
+   Mobile: keep message actions on-screen
+═══════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* Prevent the message action pill from going off-screen */
+  .mari-app .mari-message-actions {
+    max-width: calc(100vw - 1.25rem) !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.12rem;
+    padding: 0.2rem 0.3rem;
+  }
+
+  .mari-app .mari-message-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mari-app .mari-message-actions .themed-action-button {
+    min-width: 1.66rem !important;
+    min-height: 1.66rem !important;
+    padding: 0.2rem !important;
+  }
+
+  /* Same constraint for the swipe pager */
+  .mari-app .mari-message-swipes {
+    max-width: calc(100vw - 1.25rem) !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.18rem;
+  }
+
+  .mari-app .mari-message-swipes::-webkit-scrollbar {
+    display: none;
+  }
 }
