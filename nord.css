@@ -231,6 +231,18 @@ button, .btn, [role="button"] {
    box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 25%, transparent) !important;
 }
 
+/* Guided button state (character trigger) */
+.mari-app .themed-chat-input button.guided {
+   color: var(--primary) !important;
+   background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+   box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 35%, transparent) !important;
+}
+
+.mari-app .themed-chat-input button.guided:hover {
+   background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+   box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 50%, transparent) !important;
+}
+
 /* Message Bubbles */
 /*
  * Use color-mix() with --bubble-opacity (set by theme-helper.js) so that
@@ -349,6 +361,9 @@ button, .btn, [role="button"] {
 
 /* Message action buttons inside the pill */
 .mari-app .mari-message-actions .themed-action-button {
+   display: inline-flex !important;
+   align-items: center !important;
+   justify-content: center !important;
    min-width: 1.75rem !important;
    min-height: 1.75rem !important;
    padding: 0.25rem !important;
@@ -365,6 +380,17 @@ button, .btn, [role="button"] {
 .mari-app .mari-message-actions .themed-action-button:hover {
    background: var(--panel-button-hover) !important;
    color: var(--text-strong) !important;
+}
+
+.mari-app .mari-message-actions .themed-action-button.guided {
+   color: var(--primary) !important;
+   background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+   box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 35%, transparent) !important;
+}
+
+.mari-app .mari-message-actions .themed-action-button.guided:hover {
+   background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+   box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 50%, transparent) !important;
 }
 
 .mari-app .mari-message-actions .themed-action-button:is(:focus-visible, :active) {
@@ -645,7 +671,7 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
     border-color: var(--border) !important;
 }
 
-[data-theme="light"] .themed-chat-input :is(.mari-chat-input-textarea, button, .lucide, svg) {
+[data-theme="light"] .themed-chat-input :is(.mari-chat-input-textarea, button:not(.guided), .lucide, svg) {
     color: var(--foreground) !important;
 }
 
@@ -664,9 +690,22 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
       0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
-[data-theme="light"] .themed-chat-input:focus-within :is(.mari-chat-input-textarea, button, .lucide, svg),
-[data-theme="light"] .themed-chat-input:has(textarea:not(:placeholder-shown)) :is(.mari-chat-input-textarea, button, .lucide, svg) {
+[data-theme="light"] .themed-chat-input:focus-within :is(.mari-chat-input-textarea, button:not(.guided), .lucide, svg),
+[data-theme="light"] .themed-chat-input:has(textarea:not(:placeholder-shown)) :is(.mari-chat-input-textarea, button:not(.guided), .lucide, svg) {
     color: var(--foreground) !important;
+}
+
+/* Light mode guided glows (need stronger shadow opacity against light backgrounds) */
+[data-theme="light"] .mari-app .mari-message-actions .themed-action-button.guided,
+[data-theme="light"] .mari-app .themed-chat-input button.guided {
+   background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+   box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 50%, transparent) !important;
+}
+
+[data-theme="light"] .mari-app .mari-message-actions .themed-action-button.guided:hover,
+[data-theme="light"] .mari-app .themed-chat-input button.guided:hover {
+   background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+   box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 65%, transparent) !important;
 }
 
 /* ── Session Log modal (engine hardcodes white/dark, invisible in light mode) ── */
