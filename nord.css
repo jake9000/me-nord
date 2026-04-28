@@ -878,3 +878,29 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
     display: none;
   }
 }
+
+/* ── ME Accent Color Changer Compat ── */
+[data-visual-theme="nord"],
+[data-visual-theme="nord"][data-theme="dark"] {
+  --accent-changer-highlight: #88c0d0;
+  --accent-changer-highlight-soft: #81a1c1;
+  --accent-changer-accent-background: #2e3440;
+  --accent-changer-accent-sidebar: #2e3440;
+  --accent-changer-accent-surface: #434c5e;
+  --accent-changer-accent-surface-fg: #d8dee9;
+  --accent-changer-accent-strong: #4c566a;
+  --accent-changer-accent-strong-fg: #eceff4;
+  --accent-changer-accent-tint: #4c566a;
+  --accent-changer-accent-cool: #8fbcbb;
+}
+
+[data-visual-theme="nord"][data-theme="light"] {
+  --accent-changer-highlight: #5e81ac;
+  --accent-changer-accent-background: #eceff4;
+  --accent-changer-accent-sidebar: #eceff4;
+  --accent-changer-accent-surface: #d8dee9;
+  --accent-changer-accent-surface-fg: #3b4252;
+  --accent-changer-accent-strong: #d8dee9;
+  --accent-changer-accent-strong-fg: #2e3440;
+  --accent-changer-accent-tint: #d8dee9;
+}
