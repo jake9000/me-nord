@@ -148,8 +148,6 @@ Nord Dark (Lightweight)
 html, body {
   background: var(--background);
   color: var(--foreground);
-  /* Force the font to be clean sans-serif if it was set to something else */
-  font-family: "Inter", "Segoe UI", sans-serif;
   caret-color: var(--primary);
 }
 
@@ -568,23 +566,35 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
 }
 
 /* Metadata (timestamp, token count, gen label, message number) —
-   monospace and wrapped in brackets */
-.mari-app .mari-message-name ~ span {
+   monospace and wrapped in brackets. Increased opacity for readability. */
+.mari-app .mari-message-name ~ span,
+.mari-app .mari-message-timestamp,
+.mari-app .mari-message-meta span {
    font-family: "SF Mono", "Fira Code", "Consolas", monospace !important;
    font-style: normal !important;
+   color: var(--foreground) !important;
+   opacity: 0.75 !important;
 }
-.mari-app .mari-message-name ~ span::before {
+
+/* Add brackets around metadata */
+.mari-app .mari-message-name ~ span::before,
+.mari-app .mari-message-timestamp::before,
+.mari-app .mari-message-meta span::before {
    content: "[";
 }
-.mari-app .mari-message-name ~ span::after {
+.mari-app .mari-message-name ~ span::after,
+.mari-app .mari-message-timestamp::after,
+.mari-app .mari-message-meta span::after {
    content: "]";
 }
-/* Convo mode metadata */
-.mari-app .mari-message-timestamp {
-   font-family: "SF Mono", "Fira Code", "Consolas", monospace !important;
+
+/* Turn numbers (the #123 label) — make them larger and more visible */
+.mari-app span.select-none:is([class*="text-[0.5]"], [class*="text-[0.5625]"]) {
+   font-size: 0.725rem !important;
+   color: var(--foreground) !important;
+   opacity: 0.85 !important;
+   font-weight: 600 !important;
 }
-.mari-app .mari-message-timestamp::before { content: "["; }
-.mari-app .mari-message-timestamp::after  { content: "]"; }
 
 /* Ensure message content text respects the theme's foreground color */
 .mari-app .mari-message-content {
