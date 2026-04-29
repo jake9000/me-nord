@@ -8,3 +8,8 @@ Supports both dark and light modes, with full coverage of chat, RP, and GM mode 
 - **Author:** jake9000
 - **License:** CC-0, no rights reserved
 - **Targeting:** Marinara Engine v1.5.6
+
+## Screenshots
+
+![Nord Theme Screenshot 1](screenies/Screenshot_20260428_010343.png)
+![Nord Theme Screenshot 2](screenies/Screenshot_20260428_010359.png)

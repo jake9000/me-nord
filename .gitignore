@@ -7,3 +7,5 @@
 !*.json
 !.gitignore
 !*.md
+!*.png
+!screenies/
