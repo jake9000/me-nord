@@ -708,7 +708,38 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
    box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 65%, transparent) !important;
 }
 
-/* ── Session Log modal (engine hardcodes white/dark, invisible in light mode) ── */
+/* ── Session Log modal ── */
+
+/* Override hardcoded inline narration colors (like the ugly orange) to match Nord */
+.group\/logseg .text-xs.leading-relaxed[style*="color"] {
+  color: var(--foreground) !important;
+}
+
+/* User messages highlight in logs: use Nord Frost (blue) for a subtle glow */
+.group\/logseg:has(.min-w-0 .font-bold[style*="color: rgb(165, 180, 252)"]) {
+  background: color-mix(in srgb, var(--primary) 8%, transparent) !important;
+  border-color: color-mix(in srgb, var(--primary) 15%, transparent) !important;
+}
+
+/* Fix user name legibility in session log (especially in light mode) */
+.group\/logseg .min-w-0 .font-bold[style*="color: rgb(165, 180, 252)"] {
+  color: var(--primary) !important;
+}
+
+/* System messages in session logs (engine hardcodes cyan) */
+.group\/logseg[class*="bg-cyan-950"] {
+  background: color-mix(in srgb, var(--secondary) 40%, transparent) !important;
+  border-color: color-mix(in srgb, var(--border) 50%, transparent) !important;
+}
+.group\/logseg[class*="bg-cyan-950"] [class*="text-cyan-200"] {
+  color: var(--muted-foreground) !important;
+}
+.group\/logseg[class*="bg-cyan-950"] [class*="text-cyan-50"] {
+  color: var(--foreground) !important;
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace !important;
+}
+
+/* Engine hardcodes white/dark, making text invisible in light mode */
 /* Container: fixed overlay → bg-[var(--card)] rounded-2xl max-w-2xl card */
 [data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white,
 [data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .text-white\/80,
@@ -730,6 +761,48 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
 /* Edit inputs inside session log: swap dark bg + white text for theme-aware values */
 [data-theme="light"] .max-w-2xl.bg-\[var\(--card\)\] .bg-black\/40 {
   background: var(--input) !important;
+}
+
+/* ── GM Mode Action Buttons ── */
+
+/* GameNarration and Session Log action buttons (edit, delete) — the engine
+   hides these until hover (opacity-0). Override them to be always visible
+   (for mobile support) and match Nord's standard action-button style. */
+[data-tour="game-dialogue"] .game-narration-prose button,
+.group\/logseg button {
+  color: var(--muted-foreground) !important;
+  opacity: 0.6 !important; /* Override opacity-0 */
+  transition: color 140ms ease, background-color 140ms ease, opacity 140ms ease;
+}
+
+[data-tour="game-dialogue"] .game-narration-prose button:hover,
+.group\/logseg button:hover {
+  color: var(--foreground) !important;
+  background: var(--panel-button-hover) !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode specific tweak */
+[data-theme="dark"] [data-tour="game-dialogue"] .game-narration-prose button,
+[data-theme="dark"] .group\/logseg button {
+  color: var(--foreground) !important;
+  opacity: 0.52 !important;
+}
+
+[data-theme="dark"] [data-tour="game-dialogue"] .game-narration-prose button:hover,
+[data-theme="dark"] .group\/logseg button:hover {
+  opacity: 0.82 !important;
+}
+
+/* Save button specific styling */
+.group\/logseg button[title="Save"] {
+  color: #8fbcbb !important; /* Nord Frost */
+  background: rgba(143, 188, 187, 0.15) !important;
+  opacity: 0.9 !important;
+}
+.group\/logseg button[title="Save"]:hover {
+  background: rgba(143, 188, 187, 0.25) !important;
+  opacity: 1 !important;
 }
 
 /* ── GM Mode play area (narration card, widgets, input) ── */
