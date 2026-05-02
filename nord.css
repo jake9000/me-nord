@@ -260,6 +260,18 @@ button, .btn, [role="button"] {
    box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 20%, transparent) !important;
 }
 
+/* Multi-Select Mode: change message bubble to destructive color when selected */
+.mari-app .ring-\[var\(--destructive\)\]\/50 .mari-message-bubble,
+.mari-app .bg-\[var\(--destructive\)\]\/5 .mari-message-bubble {
+   background-color: var(--destructive) !important;
+   color: var(--destructive-foreground) !important;
+}
+
+.mari-app .ring-\[var\(--destructive\)\]\/50 .mari-system-message-content {
+   background-color: var(--destructive) !important;
+   color: var(--destructive-foreground) !important;
+}
+
 /* Roleplay HUD Widgets */
 .mari-app .themed-hud-widget {
    background: var(--hud-chip-bg) !important;
