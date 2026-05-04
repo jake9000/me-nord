@@ -356,8 +356,7 @@ button, .btn, [role="button"] {
    display: inline-flex !important;
    align-items: center;
    justify-content: flex-start;
-   flex-direction: row !important;
-   align-self: flex-start;
+   align-self: center !important;
    flex: 0 0 auto;
    width: fit-content !important;
    max-width: max-content;
@@ -367,6 +366,11 @@ button, .btn, [role="button"] {
    background: var(--panel-bg-soft);
    border: 1px solid var(--panel-border-accent);
    transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+/* User message actions align to the right side of the container so they grow left */
+.mari-app .mari-message-actions.flex-row-reverse {
+   align-self: flex-end !important;
 }
 
 /* Message action buttons inside the pill */
