@@ -1,0 +1,230 @@
+GM Mode — Remaining Unthemed Elements
+======================================
+
+Legend: [ ] = not yet themed, [x] = done
+
+State-color CSS variables (Tailwind color scales)
+--------------------------------------------------
+[x] --color-gray-400/800/900
+[x] --color-green-500/800/900
+[x] --color-emerald-900/950
+[x] --color-amber-50/100/300/900/950
+[x] --color-red-50/300/600/900/950
+[x] --color-sky-50/100/200/800/900/950
+
+GM Mode Chrome & Surface
+------------------------
+[x] Game surface bg-black → #2e3440
+[x] Bottom gradient overlay from-black/45
+[x] Top-right control buttons (rounded-full + backdrop-blur)
+[x] Mobile game actions button
+[x] Map day/time pill (bg-black/55)
+[x] Map zoom/generate buttons (bg-black/85)
+[x] Map separators (bg-white/20, bg-white/15)
+[x] Map lock/unlock button (text-white/30)
+[x] Party portrait borders (border-white/20, focus:ring-white/45)
+[x] Party remove button (bg-black/80)
+[x] Player messages in narration (name, text, avatar)
+
+Desktop Widgets
+---------------
+[x] Widget cards (bg-black/60 backdrop-blur-md rounded-lg)
+[x] Card header hover (hover:bg-white/5)
+[x] Edit buttons (text-white/45)
+[x] Unlock button (text-white/30)
+[x] Card text labels (text-white/80, /70, /50, /20)
+[x] Gauge track (border-white/10)
+[x] Mobile widget trigger buttons
+
+Narration Area dark: variants
+-----------------------------
+[x] Choice card container (dark:bg-black/50, dark:border-white/15)
+[x] Narration prose box (dark:bg-black/35, dark:border-white/10)
+[x] Choice badge (dark:bg-white/10, dark:text-white/90)
+[x] Scroll/action buttons (dark:bg-white/5, dark:text-white/75)
+[x] Edit/copy buttons (dark:text-white/20, dark:hover:bg-white/10)
+[x] Send button (dark:text-white/30)
+[x] Loading spinners & empty states
+
+Choice Cards ("Choose your action")
+-----------------------------------
+[x] Container (bg-black/50, border-white/15)
+[x] Title badge (bg-white/10, text-white/90)
+[x] Close button (text-white/55)
+[x] Choice buttons (border-white/10, bg-white/5, text-white/90)
+[x] Number badges (bg-white/10, text-white/60)
+[x] Hover shine overlay (via-white/5)
+
+Control Popover Menus (Retry, Volume, Mobile Actions)
+------------------------------------------------------
+[x] Popover containers (bg-black/80, /85, /70)
+[x] Menu items (text-white/85, /80)
+[x] Volume mixer title, labels, values, divider
+[x] Mute button both states (unmuted + muted/destructive)
+[x] Mobile new-session emerald → primary
+[x] Mobile end-session hover
+
+Adventure Journal Panel
+-----------------------
+[x] Root overlay (bg-black/85 z-40)
+[x] Loading overlay (bg-black/70 z-40)
+[x] Header border, title, close button
+[x] Inactive tabs (text-white/50)
+[x] Entry cards (bg-white/3, border-white/5)
+[x] Location items (border-white/10, bg-white/5)
+[x] Entry titles/NPC names (text-white/80)
+[x] Entry content, descriptions, timestamps
+[x] Entry icons (text-white/60, /40)
+[x] NPC avatar circles & generate button rings
+[x] NPC delete button → destructive hover
+[x] Notes textarea, placeholder, focus
+[x] Library markdown content
+
+Remaining (not yet themed)
+==========================
+
+Combat UI (GameCombatUI.tsx) — ~200 hardcoded white/black classes
+-----------------------------------------------------------------
+[ ] bg-black/45 — combat HUD chip bar
+[ ] bg-black/70 — action panel header
+[ ] bg-black/75 — floating tooltip overlay
+[ ] bg-black/85, /90, /95 — combat footer & log popup
+[ ] bg-white/5, /10, /15 — tabs, entry cards, skill items
+[ ] border-white/5, /8, /10, /15, /20, /30 — various panels
+[ ] text-white (bare) — titles, names, values
+[ ] text-white/30, /45, /55, /60, /70, /80 — various labels
+[ ] ring-white/15, hover:ring-white/25 — skill rings
+[ ] hover:bg-black/*, hover:text-white — various hover states
+[ ] from-black/90, /95, to-black/70, /85, /90 — gradients
+[ ] bg-sky-950/* — PC message cards (now has --color-sky-950)
+[ ] bg-red-950/* — failed/error containers (now has --color-red-950)
+[ ] bg-amber-950/* — warning containers (now has --color-amber-950)
+[ ] text-red-300, text-sky-100, text-sky-200 — state text (now has vars)
+[ ] text-amber-100, text-amber-50 — amber text (now has vars)
+[ ] text-red-50 — red text (now has --color-red-50)
+
+Note: Many state colors above are now covered by the new --color-*
+variables.  The remaining gaps are the white/black opacity classes
+and hover states unique to combat UI selectors.
+
+Inventory Modal (GameInventory.tsx)
+-----------------------------------
+[ ] bg-black (bare) — modal root
+[ ] bg-black/70 — modal backdrop
+[ ] bg-white/[0.02] — modal header
+[ ] bg-white/8 — item count badge
+[ ] border-white/8 — header border
+[ ] border-white/10 — modal root border
+[ ] text-white/40 — close button, item count
+[ ] hover:text-white/70 — button hover
+[ ] from-white/8 to-white/[0.02] — item icon gradient
+
+QTE Overlay (GameQteOverlay.tsx)
+--------------------------------
+[ ] bg-red-950/75 — urgent QTE bg (now has --color-red-950)
+[ ] bg-black/75 — normal QTE bg
+[ ] bg-white/30 — flash overlay
+[ ] border-white/20 — QTE container border
+[ ] bg-white/20 — timer bar track
+[ ] ring-amber-300/30 — QTE ring (now has --color-amber-300)
+[ ] ring-white/15 — timer bar ring
+[ ] text-white/55, /60, /50, /20 — QTE text
+[ ] border-white/5, bg-white/5, bg-white/10 — option buttons
+
+Dialogue Overlay (GameDialogueOverlay.tsx)
+-----------------------------------------
+[ ] bg-black/40 — overlay background
+[ ] bg-sky-900/60, /40, /30 — header, messages, input (now has --color-sky-900)
+[ ] border-sky-800/50 — input separator (now has --color-sky-800)
+
+Transition Manager (GameTransitionManager.tsx)
+---------------------------------------------
+[ ] bg-black (bare) — fade black overlay
+[ ] bg-black/90 — fade black overlay with opacity
+[ ] bg-white (bare) — fade white overlay
+[ ] bg-white/90 — flash white
+[ ] from-amber-900/60 via-black/80 to-black — fire transition gradient
+[ ] via-white/50 — transition divider
+[ ] text-white/90 — transition title
+
+Map Extras (GameMap.tsx)
+------------------------
+[ ] bg-black/35 — map search input
+[ ] bg-black/60 — action button (non-widget context)
+[ ] bg-white/45 — sun indicator
+[ ] bg-white/80, /70 — stars
+[ ] border-white/10 — search input
+[ ] text-white (bare) — search input
+[ ] text-white/60 — state icon, marker buttons
+[ ] text-white/90 — tooltip
+[ ] hover:bg-black, hover:bg-black/75 — button hover
+[ ] hover:text-white — button hover
+[ ] ring-white/20 — unlocked map ring
+[ ] ring-white/35, focus:ring-white/35, focus-within:ring-white/35 — focus rings
+
+Direction Engine (DirectionEngine.tsx)
+--------------------------------------
+[ ] bg-black (bare) — fade/direction overlays
+[ ] bg-black/50 — coordinate indicator
+[ ] text-white/60 — coordinate text
+[ ] hover:text-white/80 — coordinate hover
+
+Character Sheet (GameCharacterSheet.tsx)
+----------------------------------------
+[ ] bg-black/60 — modal backdrop
+[ ] Hex colors for stat bars, affinity indicators
+
+Party Sidebar (GamePartySidebar.tsx)
+-------------------------------------
+[ ] bg-amber-900/20 — reputation display (now has --color-amber-900)
+[ ] bg-amber-900/25 — trait badge (now has --color-amber-900)
+[ ] bg-black/50 — HP bar track
+[ ] border-amber-500/20, /25 — borders (now has --color-amber-500)
+[ ] ring-amber-500/10 — HP bar ring (now has --color-amber-500)
+[ ] text-amber-300/60 — rep value (now has --color-amber-300)
+[ ] Hex colors — blood type, height/weight, NPC affinity colors
+
+Grid Map (GameGridMap.tsx)
+--------------------------
+[ ] bg-gray-800/40, /60 — fog & cave terrain (now has --color-gray-800)
+[ ] bg-gray-900/70 — undiscovered fog (now has --color-gray-900)
+[ ] bg-green-900/40 — grass terrain (now has --color-green-900)
+[ ] bg-amber-900/40 — desert terrain (now has --color-amber-900)
+
+Node Map (GameNodeMap.tsx)
+--------------------------
+[ ] bg-gray-900/30 — node tile, image preview (now has --color-gray-900)
+
+Readable Display (GameReadableDisplay.tsx)
+------------------------------------------
+[ ] 10 hardcoded visual styles (parchment, torn, wax-sealed, charred,
+    official, leather-bound, arcane, old tome, modern, dark grimoire)
+[ ] Each style has fully hardcoded bg, text, border hex colors
+
+Element Reaction (GameElementReaction.tsx)
+------------------------------------------
+[ ] bg-black/85 — popup (non-rounded context)
+[ ] shadow-black/40 — popup shadow
+[ ] text-white (bare) — reaction title
+[ ] hover:text-white — dismiss button
+
+NPC Tracker (GameNpcTracker.tsx)
+--------------------------------
+[ ] bg-white/5 — NPC rows (outside Journal scope)
+[ ] hover:bg-white/10 — NPC row hover
+[x] text-gray-400 — neutral reputation (fixed by --color-gray-400)
+
+Session History (GameSessionHistory.tsx)
+-----------------------------------------
+[ ] text-white (bare) — primary buttons
+
+Global Hover / Focus Gaps
+--------------------------
+[ ] hover:bg-black (bare), hover:bg-black/60, /65, /75, /80
+[ ] hover:text-white outside game-dialogue
+[ ] hover:text-white/70, hover:text-white/80
+[ ] hover:border-white/15, /20, /25, /30, /40
+[ ] focus:border-white/20, /30
+[ ] focus:ring-white/20, /35
+[ ] hover:ring-white/15, /25
+[ ] shadow-black/30, /35, /40, /60

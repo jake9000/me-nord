@@ -141,6 +141,51 @@ Nord Dark (Lightweight)
   --color-sky-500: #7eb2c2;
   --color-blue-400: #81a1c1;
 
+  /* ── Supplementary Tailwind Color Scales ──
+     These fill in scales used by game components (combat, dialogue, map,
+     party sidebar) that referenced the default Tailwind palette.  Each is
+     mapped to a Nord-appropriate hue at the correct lightness level. */
+
+  /* Green (Nord Aurora Green #a3be8c → extended) */
+  --color-green-900: #4a5a3e;
+  --color-green-800: #5d6e4f;
+  --color-green-500: #a3be8c;
+
+  /* Gray (Nord Polar Night / Snow Storm neutrals) */
+  --color-gray-900: #2e3540;
+  --color-gray-800: #3b4350;
+  --color-gray-400: #6e7a8a;
+
+  /* Emerald extended */
+  --color-emerald-950: #46553c;
+  --color-emerald-900: #546745;
+
+  /* Amber (Nord Aurora Yellow #ebcb8b → extended) */
+  --color-amber-950: #3d3322;
+  --color-amber-900: #6b5a3d;
+  --color-amber-300: #f1d59f;
+  --color-amber-100: #f7ecd6;
+  --color-amber-50: #fcf8f0;
+
+  /* Red (Nord Aurora Red #bf616a → extended) */
+  --color-red-950: #3d1d22;
+  --color-red-900: #6b343b;
+  --color-red-600: #c1525c;
+  --color-red-300: #df9da3;
+  --color-red-50: #fce8ea;
+
+  /* Sky (Nord Frost Teal #88c0d0 → extended) */
+  --color-sky-950: #223337;
+  --color-sky-900: #3d5a61;
+  --color-sky-800: #527883;
+  --color-sky-200: #b0d9e3;
+  --color-sky-100: #d0e8ee;
+  --color-sky-50: #f0f7f9;
+
+  /* ── Range Inputs ── */
+  --range-thumb-color: var(--foreground);
+  --range-thumb-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--primary) 25%, transparent);
+
   /* ── Cursor ── */
   --cursor-pink: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 3L10 20L12 12L20 10L3 3Z' fill='%2388c0d0' stroke='%232e3440' stroke-width='1'/%3E%3C/svg%3E");
 }
@@ -690,6 +735,10 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
   --glow-primary: rgba(78, 113, 160, 0.2);
   --glow-accent: rgba(78, 113, 160, 0.15);
 
+  /* ── Range Inputs ── */
+  --range-thumb-color: var(--foreground);
+  --range-thumb-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--primary) 30%, transparent);
+
   /* ── Cursor ── */
   --cursor-pink: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 3L10 20L12 12L20 10L3 3Z' fill='%235e81ac' stroke='%23eceff4' stroke-width='1'/%3E%3C/svg%3E");
 }
@@ -838,7 +887,584 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
   opacity: 1 !important;
 }
 
-/* ── GM Mode play area (narration card, widgets, input) ── */
+/* ── GM Mode — Game Surface Background ── */
+
+/* Replace pure black game surface with Nord Polar Night (#2e3440).
+   Uses a hardcoded Nord dark so the game canvas stays dark even in light mode
+   (the UI cards on top get their own light-mode backgrounds). */
+[data-tour="chat-area"] [class*="overflow-hidden"][class*="bg-black"]:not([class*="bg-black\/"]) {
+  background: #2e3440 !important;
+}
+
+/* Bottom fade gradient overlay — match the Nord game-surface colour */
+[data-tour="chat-area"] [class*="from-black\/45"] {
+  background-image: linear-gradient(to top,
+    rgba(46, 52, 64, 0.45),
+    rgba(46, 52, 64, 0.15),
+    transparent
+  ) !important;
+}
+
+/* ── GM Mode — Desktop Widget Cards ── */
+
+/* Card surface: bg-black/60 → Nord panel surface */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"][class*="rounded-lg"]:not([class*="rounded-full"]) {
+  background: var(--panel-bg-soft-strong) !important;
+  border-color: var(--panel-border-accent) !important;
+}
+
+/* Card header row hover: bg-white/5 → Nord accent hover */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="hover:bg-white\/5"]:hover {
+  background: var(--panel-button-hover) !important;
+}
+
+/* Card edit/action buttons (pencil, etc.) */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/45"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/45"]:hover {
+  background: var(--panel-button-hover) !important;
+  color: var(--foreground) !important;
+}
+
+/* Card unlock/drag handle */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/30"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/30"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* Card text — name labels, values, version text (all white-semitransparent) */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/80"] {
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/70"] {
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/50"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="text-white\/20"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Gauge semi-circle track border */
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"] [class*="border-white\/10"] {
+  border-color: var(--border) !important;
+}
+
+/* ── GM Mode — Mobile Widget Trigger Buttons ── */
+
+[data-tour="chat-area"] [class*="bg-black\/60"][class*="backdrop-blur-md"][class*="rounded-xl"][class*="h-9"] {
+  background: var(--hud-chip-bg) !important;
+  border-color: var(--hud-chip-border) !important;
+  color: var(--foreground) !important;
+}
+
+/* ── GM Mode — Map Chrome (Day/Time, Zoom, Generate buttons) ── */
+
+/* Day/time indicator pill + time-of-day sub-pill */
+[data-tour="chat-area"] [class*="bg-black\/55"][class*="rounded-full"] {
+  background: var(--hud-chip-bg) !important;
+  border-color: var(--hud-chip-border) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/55"][class*="rounded-full"] [class*="text-white\/"] {
+  color: var(--foreground) !important;
+}
+
+/* Day/time vertical separator line */
+[data-tour="chat-area"] [class*="bg-white\/20"][class*="w-px"] {
+  background: var(--hud-chip-border) !important;
+}
+
+/* Map zoom & generate button panels */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="rounded-md"] {
+  background: var(--hud-chip-bg) !important;
+  border-color: var(--hud-chip-border) !important;
+}
+
+/* Map zoom/generate button text */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="rounded-md"] [class*="text-white\/80"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Map zoom button hover states */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="rounded-md"] [class*="hover:bg-white\/10"]:hover {
+  background: var(--panel-button-hover) !important;
+}
+
+/* Map zoom separator vertical line */
+[data-tour="chat-area"] [class*="bg-white\/15"][class*="w-px"] {
+  background: var(--hud-menu-divider) !important;
+}
+
+/* Map lock/unlock button */
+[data-tour="game-map"] [class*="text-white\/30"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="game-map"] [class*="text-white\/30"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* ── GM Mode — Party Bar ── */
+
+/* Portrait circle borders */
+[data-tour="game-party"] [class*="border-white\/20"][class*="rounded-full"] {
+  border-color: var(--border) !important;
+}
+
+/* Portrait hover border glow */
+[data-tour="game-party"] [class*="group-hover:border-white\/40"] {
+  border-color: var(--panel-border-accent) !important;
+}
+
+/* Party member remove "X" button */
+[data-tour="game-party"] [class*="bg-black\/80"][class*="rounded-full"] {
+  background: var(--panel-bg-soft-strong) !important;
+  border-color: var(--panel-border-accent) !important;
+}
+
+/* Party portrait focus ring */
+[data-tour="game-party"] [class*="focus:ring-white\/45"]:focus {
+  --tw-ring-color: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+}
+
+/* ── GM Mode — Player Messages in Narration ── */
+
+/* Player character name */
+[data-tour="game-dialogue"] [class*="text-white\/85"][class*="font-semibold"] {
+  color: var(--foreground) !important;
+}
+
+/* Player message body text */
+[data-tour="game-dialogue"] [class*="text-white\/75"][class*="break-words"] {
+  color: var(--foreground) !important;
+}
+
+/* Player avatar border */
+[data-tour="game-dialogue"] [class*="border-white\/15"][class*="object-cover"] {
+  border-color: var(--border) !important;
+}
+
+/* Player message bubble container (the rounded-xl bg-clip-padding wrapper) */
+[data-tour="game-dialogue"] [class*="bg-clip-padding"][class*="rounded-xl"][class*="border"] {
+  border-color: var(--panel-border-accent) !important;
+  background: color-mix(in srgb, var(--card) 70%, transparent) !important;
+}
+
+/* ── GM Mode — Narration Area dark: variant overrides ──
+   The engine uses Tailwind’s dark: prefix (e.g. dark:bg-black/50) which
+   kicks in when <html class="dark">.  These override the perfectly good
+   CSS-variable base classes.  The rules below neutralise those dark:
+   variants so the Nord palette is used in dark mode too.  The existing
+   [data-theme="light"] rules further down handle light-mode recolouring. */
+
+/* Narration choice card (the rounded-2xl outer wrapper) */
+[data-tour="game-dialogue"] [class*="dark:bg-black\/50"],
+[data-tour="game-dialogue"] [class*="dark:bg-black\/60"] {
+  background: var(--card) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:border-white\/15"],
+[data-tour="game-dialogue"] [class*="dark:border-white\/10"] {
+  border-color: var(--border) !important;
+}
+
+/* Narration prose text box */
+[data-tour="game-dialogue"] [class*="dark:bg-black\/35"] {
+  background: var(--secondary) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:bg-black\/20"] {
+  background: var(--muted) !important;
+}
+
+/* Choice-cards badge (the "Choices" / "Shop" pill) */
+[data-tour="game-dialogue"] [class*="dark:bg-white\/10"] {
+  background: var(--secondary) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:text-white\/90"],
+[data-tour="game-dialogue"] [class*="dark:text-white\/80"],
+[data-tour="game-dialogue"] [class*="dark:text-white\/70"] {
+  color: var(--foreground) !important;
+}
+
+/* Scroll / action buttons under the narration box */
+[data-tour="game-dialogue"] [class*="dark:bg-white\/5"] {
+  background: var(--muted) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:border-white\/5"] {
+  border-color: var(--border) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:text-white\/75"] {
+  color: var(--foreground) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:hover:bg-white\/10"]:hover,
+[data-tour="game-dialogue"] [class*="dark:hover:bg-white\/20"]:hover {
+  background: var(--panel-button-hover) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:hover:text-white"]:hover,
+[data-tour="game-dialogue"] [class*="dark:hover:text-white\/60"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* Edit / copy hidden buttons (appear on hover in narration prose) */
+[data-tour="game-dialogue"] [class*="dark:text-white\/20"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:text-white\/45"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Send button in the input bar */
+[data-tour="game-dialogue"] [class*="dark:text-white\/30"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:text-white\/40"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Loading spinner border inside narration */
+[data-tour="game-dialogue"] [class*="dark:border-white\/20"] {
+  border-color: var(--border) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:border-white\/30"] {
+  border-color: var(--border) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:border-t-white"],
+[data-tour="game-dialogue"] [class*="dark:border-t-white\/70"] {
+  border-top-color: var(--foreground) !important;
+}
+
+/* Spinner / loading text in narration loading state */
+[data-tour="game-dialogue"] [class*="dark:bg-black\/40"] {
+  background: var(--card) !important;
+}
+[data-tour="game-dialogue"] [class*="dark:bg-black\/80"] {
+  background: var(--card) !important;
+}
+
+/* ── GM Mode — Adventure Journal Panel ──
+   Full-screen journal overlay (bg-black/85) with tabs, entries, notes.
+   Uses z-40 for the overlay root — the only bg-black/85+z-40 element
+   that lacks a rounded-* class (distinguishing it from volume mixer). */
+
+/* Journal root overlay */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="backdrop-blur-md"][class*="z-40"]:not([class*="rounded"]) {
+  background: var(--card) !important;
+}
+
+/* Loading overlay inside journal */
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur-sm"][class*="z-40"] {
+  background: color-mix(in srgb, var(--card) 70%, transparent) !important;
+}
+
+/* Header & tab bar borders */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="border-white\/10"] {
+  border-color: var(--border) !important;
+}
+
+/* Header title ("Adventure Journal") */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/90"] {
+  color: var(--foreground) !important;
+}
+
+/* Close button */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/60"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/60"]:hover {
+  background: var(--panel-button-hover) !important;
+  color: var(--foreground) !important;
+}
+
+/* Inactive tab text */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/50"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="hover:bg-white\/5"]:hover {
+  background: var(--panel-button-hover) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="hover:text-white\/70"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* Empty state text */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/40"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* ── Journal Entry Cards (shared patterns) ── */
+
+/* Entry card backgrounds: bg-white/3 → Nord subtle surface */
+[data-tour="chat-area"] [class*="bg-white\/3"][class*="rounded-lg"] {
+  background: var(--secondary) !important;
+}
+
+/* Entry card borders: border-white/5 → Nord border */
+[data-tour="chat-area"] [class*="border-white\/5"][class*="rounded-lg"] {
+  border-color: var(--border) !important;
+}
+
+/* Location items: border-white/10 bg-white/5 */
+[data-tour="chat-area"] [class*="border-white\/10"][class*="bg-white\/5"][class*="rounded-lg"] {
+  background: var(--muted) !important;
+  border-color: var(--border) !important;
+}
+[data-tour="chat-area"] [class*="border-white\/10"][class*="bg-white\/5"][class*="rounded-lg"] [class*="text-white\/70"] {
+  color: var(--foreground) !important;
+}
+
+/* NPC row backgrounds */
+[data-tour="chat-area"] [class*="bg-white\/3"][class*="rounded-lg"]:not([class*="border"]) {
+  border: 1px solid var(--border) !important;
+}
+
+/* Entry title / NPC name */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/80"] {
+  color: var(--foreground) !important;
+}
+
+/* Entry content / NPC description */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/40"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Entry icon colors */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/60"][class*="lucide"],
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/40"][class*="lucide"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Timestamps & meta-text */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/30"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* NPC initial / avatar circle */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="rounded-full"][class*="ring-white\/10"] {
+  background: var(--secondary) !important;
+  color: var(--foreground) !important;
+  --tw-ring-color: var(--border) !important;
+}
+
+/* NPC generate portrait button ring */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="ring-white\/15"] {
+  --tw-ring-color: var(--panel-border-accent) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="hover:ring-white\/25"]:hover {
+  --tw-ring-color: var(--primary) !important;
+}
+
+/* NPC delete button */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/35"] {
+  color: var(--muted-foreground) !important;
+  opacity: 0.5 !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/35"]:hover {
+  color: var(--destructive) !important;
+  opacity: 1 !important;
+}
+
+/* Notes textarea */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="bg-black\/40"][class*="rounded-lg"] {
+  background: var(--input) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="placeholder:text-white\/25"]::placeholder {
+  color: var(--muted-foreground) !important;
+  opacity: 0.4 !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="focus:border-white\/20"]:focus {
+  border-color: var(--primary) !important;
+}
+
+/* Notes display area (when not editing) */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/75"] {
+  color: var(--foreground) !important;
+}
+
+/* Library content markdown */
+[data-tour="chat-area"] [class*="bg-black\/85"][class*="z-40"] [class*="text-white\/70"] {
+  color: var(--foreground) !important;
+}
+
+/* Loading text */
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="z-40"] [class*="text-white\/60"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* ═══════════════════════════════════════
+   GM Mode — Control Popover Menus (Retry, Volume, Mobile Actions) ──
+   Popovers triggered from top-right / mobile control buttons.
+   Containers use bg-black/80, /85, or /70 + border-white/15 + backdrop-blur. */
+
+/* Popover container backgrounds & borders */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/80"][class*="backdrop-blur"][class*="rounded-xl"],
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"][class*="rounded-xl"],
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/70"][class*="backdrop-blur"][class*="rounded-xl"] {
+  background: var(--hud-menu-bg) !important;
+  border-color: var(--hud-menu-border) !important;
+}
+
+/* Popover menu item buttons */
+[data-tour="chat-area"] [class*="bg-black\/80"][class*="backdrop-blur"] [class*="text-white\/85"],
+[data-tour="chat-area"] [class*="bg-black\/80"][class*="backdrop-blur"] [class*="text-white\/80"],
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="text-white\/85"],
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="text-white\/80"] {
+  color: var(--foreground) !important;
+}
+
+/* Popover menu item hover */
+[data-tour="chat-area"] [class*="bg-black\/80"][class*="backdrop-blur"] [class*="hover:bg-white\/10"]:hover,
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="hover:bg-white\/10"]:hover {
+  background: var(--panel-button-hover) !important;
+  color: var(--foreground) !important;
+}
+
+/* Volume mixer — title text */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="text-white\/60"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Volume mixer — slider label & value text */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="text-white\/70"] {
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="text-white\/40"] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Volume mixer — divider line */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="border-white\/10"][class*="border-b"] {
+  border-color: var(--hud-menu-divider) !important;
+}
+
+/* Volume mixer — mute/unmute button (non-muted state) */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="bg-white\/10"][class*="rounded-full"] {
+  background: var(--panel-button-bg-strong) !important;
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="hover:bg-white\/20"]:hover {
+  background: var(--panel-button-hover-strong) !important;
+}
+
+/* Volume mixer — mute button muted state (red) → use Nord destructive */
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="bg-red-500\/30"] {
+  background: color-mix(in srgb, var(--destructive) 30%, transparent) !important;
+  color: var(--destructive) !important;
+}
+[data-tour="chat-area"] [class*="border-white\/15"][class*="bg-black\/85"][class*="backdrop-blur"] [class*="hover:bg-red-500\/50"]:hover {
+  background: color-mix(in srgb, var(--destructive) 50%, transparent) !important;
+}
+
+/* Mobile actions menu — new session button (emerald accent) */
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="text-emerald-200"] {
+  color: var(--primary) !important;
+}
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="hover:bg-emerald-500\/20"]:hover {
+  background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+
+/* Mobile actions menu — end session button (no hover:text-white) */
+[data-tour="chat-area"] [class*="bg-black\/70"][class*="backdrop-blur"] [class*="text-white\/80"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* ── GM Mode — Choice Cards (the "Choose your action" popup) ──
+   Engine uses hardcoded white-on-black.  Key marker: rounded-2xl +
+   border-white/15 + bg-black/50 inside game-dialogue. */
+
+/* Container card */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"][class*="backdrop-blur-md"] {
+  background: var(--card) !important;
+  border-color: var(--border) !important;
+}
+
+/* Title badge ("Choose your action" / "Choices") */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="bg-white\/10"][class*="rounded-full"] {
+  background: var(--secondary) !important;
+}
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="text-white\/90"][class*="font-semibold"] {
+  color: var(--foreground) !important;
+}
+
+/* Close (X) button */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="text-white\/55"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="text-white\/55"]:hover {
+  background: var(--panel-button-hover) !important;
+  color: var(--foreground) !important;
+}
+
+/* Individual choice buttons (unselected state) */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="border-white\/10"][class*="rounded-xl"] {
+  border-color: var(--border) !important;
+  background: var(--muted) !important;
+  color: var(--foreground) !important;
+}
+
+/* Choice button hover — keep the engine's primary-color hover (it already
+   uses var(--primary)), just fix the text from white to foreground */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="border-white\/10"][class*="rounded-xl"]:hover {
+  color: var(--foreground) !important;
+}
+
+/* Choice number badge (the "1", "2", "3" circles) */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="bg-white\/10"][class*="text-white\/60"] {
+  background: var(--secondary) !important;
+  color: var(--foreground) !important;
+}
+
+/* Choice button hover shine overlay (via-white/5 → use muted tone) */
+[data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"] [class*="via-white\/5"] {
+  background-image: linear-gradient(to right,
+    transparent,
+    color-mix(in srgb, var(--muted-foreground) 5%, transparent),
+    transparent
+  ) !important;
+}
+
+/* Light mode: override the hardcoded bg-black/50 on the choice-card container */
+[data-theme="light"] [data-tour="game-dialogue"] [class*="rounded-2xl"][class*="border-white\/15"][class*="backdrop-blur-md"] {
+  background: var(--card) !important;
+  border-color: var(--border) !important;
+}
+
+/* ── GM Mode — Game-surface-level dark: variant overrides ──
+   Loading spinners, empty states, transitions — these sit outside
+   data-tour="game-dialogue" but inside the chat-area. */
+
+[data-tour="chat-area"] [class*="dark:bg-black\/80"] {
+  background: var(--card) !important;
+}
+[data-tour="chat-area"] [class*="dark:border-white\/20"] {
+  border-color: var(--border) !important;
+}
+[data-tour="chat-area"] [class*="dark:border-t-white\/70"] {
+  border-top-color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="dark:text-white\/70"] {
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="dark:text-white\/60"] {
+  color: var(--foreground) !important;
+}
+[data-tour="chat-area"] [class*="dark:text-white\/40"] {
+  color: var(--muted-foreground) !important;
+}
+[data-tour="chat-area"] [class*="dark:bg-white\/10"] {
+  background: var(--secondary) !important;
+}
+[data-tour="chat-area"] [class*="dark:hover:bg-white\/20"]:hover {
+  background: var(--panel-button-hover) !important;
+}
+
+/* ═══════════════════════════════════════
+   GM Mode play area (narration card, widgets, input)
+   Light-mode overrides — keep these AFTER the unscoped rules above.
+═══════════════════════════════════════ */
 
 /* Narration card + widget cards: engine hardcodes dark overlays */
 [data-theme="light"] [data-tour="game-dialogue"] .bg-black\/50,
@@ -988,6 +1614,63 @@ header[data-component="TopBar"] > div.flex.items-center.gap-2 {
   .mari-app .mari-message-swipes::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* ═══════════════════════════════════════
+   Tracker Data Sidebar
+═══════════════════════════════════════ */
+
+.mari-tracker-panel {
+  background: color-mix(in srgb, var(--card) 68%, transparent) !important;
+  --tw-ring-color: color-mix(in srgb, var(--border) 60%, transparent) !important;
+}
+
+/* Tracker panel scrollbar — use primary color at readable opacity */
+.mari-tracker-panel-scroll {
+  scrollbar-color: color-mix(in srgb, var(--primary) 48%, transparent) transparent !important;
+}
+
+.mari-tracker-panel-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary) 52%, transparent) !important;
+}
+
+.mari-tracker-panel-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--primary) 72%, transparent) !important;
+}
+
+/* ═══════════════════════════════════════
+   Spotify Volume Slider (Nord Aurora Green)
+═══════════════════════════════════════ */
+
+input[type="range"].mari-spotify-volume-slider {
+  --range-track-color: color-mix(in srgb, var(--card) 80%, transparent);
+  --range-fill-color: #a3be8c;
+  --range-thumb-color: #a3be8c;
+  --range-thumb-shadow: 0 0 0 0.125rem color-mix(in srgb, var(--card) 84%, transparent);
+  accent-color: #a3be8c;
+}
+
+input[type="range"].mari-spotify-volume-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #a3be8c 0%,
+    #a3be8c var(--range-progress),
+    color-mix(in srgb, var(--card) 80%, transparent) var(--range-progress),
+    color-mix(in srgb, var(--card) 80%, transparent) 100%
+  );
+}
+
+input[type="range"].mari-spotify-volume-slider::-moz-range-track {
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+}
+
+input[type="range"].mari-spotify-volume-slider::-moz-range-progress {
+  background: #a3be8c;
+}
+
+input[type="range"].mari-spotify-volume-slider::-webkit-slider-thumb,
+input[type="range"].mari-spotify-volume-slider::-moz-range-thumb {
+  background: #a3be8c;
 }
 
 /* ── ME Accent Color Changer Compat ── */
