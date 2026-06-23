@@ -6,8 +6,8 @@ Supports both dark and light modes, with full coverage of chat, RP, and GM mode 
 
 ## Screenshots
 
-![Nord Theme Screenshot 1](screenies/Screenshot_20260428_010343.png)
-![Nord Theme Screenshot 2](screenies/Screenshot_20260428_010359.png)
+![Nord Theme Screenshot 1](screenies/screen_dark.png)
+![Nord Theme Screenshot 2](screenies/screen_light.png)
 
 ## Dependencies
 Some elements such as chat bubbles will not be themed unless you also install [me-themehelper](https://github.com/jake9000/me-themehelper)
