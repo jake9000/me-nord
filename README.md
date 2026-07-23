@@ -9,13 +9,10 @@ Supports both dark and light modes, with full coverage of chat, RP, and GM mode 
 ![Nord Theme Screenshot 1](screenies/screen_dark.png)
 ![Nord Theme Screenshot 2](screenies/screen_light.png)
 
-## Dependencies
-Some elements such as chat bubbles will not be themed unless you also install [me-themehelper](https://github.com/jake9000/me-themehelper)
-
 ## Instructions
 
-1. Download [nord.json](https://github.com/jake9000/me-nord/blob/master/nord.json), and upload it to marinara-engine in Settings > Themes
-2. Download [theme-helper.extension.json](https://github.com/jake9000/me-themehelper/blob/master/theme-helper.extension.json) and upload it to marinara-engine in Settings > Extensions.
+1. Download [nord.json](https://github.com/jake9000/me-nord/blob/master/nord.json), and upload it to marinara-engine in Settings > Addons
+2. Good Job
 
 To change between light and dark, use the dropdown menu at Settings > Appearance > Color Scheme.
 
