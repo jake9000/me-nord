@@ -25,5 +25,5 @@ To change between light and dark, use the dropdown menu at Settings > Appearance
 ## Info
 - **Author:** jake9000
 - **License:** CC-0, no rights reserved
-- **Targeting:** Marinara Engine v1.5.6
+- **Targeting:** Marinara Engine v2.5.1
 
