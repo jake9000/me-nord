@@ -56,12 +56,7 @@ Nord Dark (Lightweight)
 
   /* ── App Accent ── */
   --marinara-app-accent-solid: var(--primary);
-  --marinara-app-accent-gradient: linear-gradient(
-    90deg,
-    var(--marinara-app-accent-solid),
-    color-mix(in srgb, var(--marinara-app-accent-solid) 76%, var(--foreground) 24%),
-    var(--marinara-app-accent-solid)
-  );
+  --marinara-app-accent-gradient: linear-gradient(90deg, var(--marinara-app-accent-solid), color-mix(in srgb, var(--marinara-app-accent-solid) 76%, var(--foreground) 24%), var(--marinara-app-accent-solid));
 
   /* ── Chat Mode Logo Colors ──
      The sidebar [+] button, mode tabs, and chat
@@ -77,6 +72,7 @@ Nord Dark (Lightweight)
   --mari-logo-title-cyan: #88c0d0;
   --mari-logo-title-orange: #d08770;
   --mari-logo-title-pink: #b48ead;
+  --marinara-mode-game-accent: var(--mari-logo-pink);
 
   /* ── Shell Chrome ── */
   --marinara-topbar-surface: color-mix(in srgb, var(--card) 80%, transparent);
@@ -265,12 +261,7 @@ Nord Dark (Lightweight)
 
   /* ── App Accent ── */
   --marinara-app-accent-solid: var(--primary);
-  --marinara-app-accent-gradient: linear-gradient(
-    90deg,
-    var(--marinara-app-accent-solid),
-    color-mix(in srgb, var(--marinara-app-accent-solid) 76%, var(--foreground) 24%),
-    var(--marinara-app-accent-solid)
-  );
+  --marinara-app-accent-gradient: linear-gradient(90deg, var(--marinara-app-accent-solid), color-mix(in srgb, var(--marinara-app-accent-solid) 76%, var(--foreground) 24%), var(--marinara-app-accent-solid));
 
   /* ── Chat Mode Logo Colors (light mode) ── */
   --mari-logo-cyan: #5e81ac;
@@ -282,6 +273,7 @@ Nord Dark (Lightweight)
   --mari-logo-title-cyan: #5e81ac;
   --mari-logo-title-orange: #d08770;
   --mari-logo-title-pink: #b48ead;
+  --marinara-mode-game-accent: var(--mari-logo-pink);
 
   /* ── Tailwind Palette Remap (light mode) ── */
   --color-pink-300: #b48ead;
@@ -543,4 +535,9 @@ Nord Dark (Lightweight)
    ═══════════════════════════════════════ */
 [data-chat-mode="roleplay"] .mari-message-bubble {
   --tw-ring-color: color-mix(in srgb, var(--marinara-chat-chrome-accent) 16%, transparent) !important;
+}
+
+/* Keep danger controls on Nord Aurora red while Accent Pulse runs */
+[data-marinara-accent-animation] .mari-chrome-control--danger {
+  --destructive: #bf616a;
 }
